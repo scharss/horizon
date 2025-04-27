@@ -1,4 +1,4 @@
-# Calculadora de Alcance Visual de de la Curvatura de la Tierra
+# Calculadora de Alcance Visual de la Curvatura de la Tierra
 
 Esta es una aplicación web interactiva creada con la biblioteca [p5.js](https://p5js.org/) que simula y visualiza si un objeto distante es visible para un observador, teniendo en cuenta el efecto de la curvatura de la Tierra.
 
