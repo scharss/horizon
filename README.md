@@ -35,25 +35,27 @@ Al hacer clic en un botón, la aplicación calcula si, dada la curvatura de la T
 
 El cálculo se basa en el concepto de la "distancia al horizonte". La distancia al horizonte es la distancia máxima a la que un observador a una cierta altura puede ver la superficie de la Tierra antes de que la curvatura oculte lo que hay más allá.
 
-La fórmula aproximada utilizada en este código para la distancia al horizonte (`d`) en kilómetros, dada una altura (`h`) en metros, es:
+La fórmula aproximada utilizada en este código para la distancia al horizonte ($d$) en kilómetros, dada una altura ($h$) en metros, es:
 
-`d = 3.57 * sqrt(h)`
+$$d = 3.57 \cdot \sqrt{h}$$
 
-Este factor `3.57` deriva de usar el radio de la Tierra (aproximadamente 6371 km) y a menudo incluye una corrección estándar para tener en cuenta la refracción atmosférica, que hace que los objetos parezcan ligeramente más altos o más lejanos de lo que estarían en el vacío.
+Este factor $3.57$ deriva de usar el radio de la Tierra (aproximadamente 6371 km) y a menudo incluye una corrección estándar para tener en cuenta la refracción atmosférica, que hace que los objetos parezcan ligeramente más altos o más lejanos de lo que estarían en el vacío.
 
-Para que un objeto sea visible sobre la curvatura de la Tierra, la distancia total entre el observador y el objeto (`distancia_ingresada`) debe ser menor o igual a la suma de la distancia al horizonte del observador (`d_observador`) y la distancia al horizonte del objeto (`d_objeto`).
+Para que un objeto sea visible sobre la curvatura de la Tierra, la distancia total entre el observador y el objeto (`distancia_ingresada`) debe ser menor o igual a la suma de la distancia al horizonte del observador ($d_{\text{observador}}$) y la distancia al horizonte del objeto ($d_{\text{objeto}}$).
 
 **Condición de Visibilidad:**
 
-`distancia_ingresada <= d_observador + d_objeto`
+$$\text{distancia}_{\text{ingresada}} \le d_{\text{observador}} + d_{\text{objeto}}$$
 
 Donde:
-*   `distancia_ingresada` es el valor que el usuario pone en el campo "Distancia (km)".
-*   `d_observador = 3.57 * sqrt(altura_observador)` (con `altura_observador` en metros).
-*   `d_objeto = 3.57 * sqrt(altura_objeto)` (con `altura_objeto` en metros).
+*   $\text{distancia}_{\text{ingresada}}$ es el valor que el usuario pone en el campo "Distancia (km)".
+*   $d_{\text{observador}} = 3.57 \cdot \sqrt{\text{altura}_{\text{observador}}}$ (con $\text{altura}_{\text{observador}}$ en metros).
+*   $d_{\text{objeto}} = 3.57 \cdot \sqrt{\text{altura}_{\text{objeto}}}$ (con $\text{altura}_{\text{objeto}}$ en metros).
 
-Si la `distancia_ingresada` es mayor que la suma `d_observador + d_objeto`, el objeto se considera **OCULTO**.
-Si la `distancia_ingresada` es menor o igual a la suma `d_observador + d_objeto`, el objeto se considera **VISIBLE**.
+Si la $\text{distancia}_{\text{ingresada}}$ es mayor que la suma $d_{\text{observador}} + d_{\text{objeto}}$, el objeto se considera **OCULTO**.
+Si la $\text{distancia}_{\text{ingresada}}$ es menor o igual a la suma $d_{\text{observador}} + d_{\text{objeto}}$, el objeto se considera **VISIBLE**.
+
+*Nota: Las ecuaciones mostradas aquí utilizan sintaxis de MathJax/LaTeX para una mejor visualización en plataformas compatibles (como GitHub).*
 
 ### Paso a Paso con Ejemplos
 
@@ -67,25 +69,25 @@ Vamos a usar ejemplos reales para ilustrar el cálculo.
     *   Altura Objeto (m): `200` (Altura de la colina por encima del terreno circundante)
 
 *   **Cálculo:**
-    1.  Calcular distancia al horizonte del observador (`d_observador`):
-        `d_observador = 3.57 * sqrt(2)`
-        `d_observador ≈ 3.57 * 1.414`
-        `d_observador ≈ 5.05 km`
+    1.  Calcular distancia al horizonte del observador ($d_{\text{observador}}$):
+        $$d_{\text{observador}} = 3.57 \cdot \sqrt{2}$$
+        $$d_{\text{observador}} \approx 3.57 \cdot 1.414$$
+        $$d_{\text{observador}} \approx 5.05 \text{ km}$$
 
-    2.  Calcular distancia al horizonte del objeto (`d_objeto`):
-        `d_objeto = 3.57 * sqrt(200)`
-        `d_objeto ≈ 3.57 * 14.142`
-        `d_objeto ≈ 50.5 km`
+    2.  Calcular distancia al horizonte del objeto ($d_{\text{objeto}}$):
+        $$d_{\text{objeto}} = 3.57 \cdot \sqrt{200}$$
+        $$d_{\text{objeto}} \approx 3.57 \cdot 14.142$$
+        $$d_{\text{objeto}} \approx 50.5 \text{ km}$$
 
     3.  Calcular la suma de las distancias al horizonte:
-        `Suma_horizontes = d_observador + d_objeto`
-        `Suma_horizontes ≈ 5.05 km + 50.5 km`
-        `Suma_horizontes ≈ 55.55 km`
+        $$\text{Suma}_{\text{horizontes}} = d_{\text{observador}} + d_{\text{objeto}}$$
+        $$\text{Suma}_{\text{horizontes}} \approx 5.05 \text{ km} + 50.5 \text{ km}$$
+        $$\text{Suma}_{\text{horizontes}} \approx 55.55 \text{ km}$$
 
     4.  Comparar la distancia ingresada con la suma de los horizontes:
-        `distancia_ingresada (60 km) > Suma_horizontes (55.55 km)`
+        $$60 \text{ km} > 55.55 \text{ km}$$
 
-*   **Resultado:** Como `60 > 55.55`, la condición de visibilidad (`<=`) es falsa. El objeto está **OCULTO**. El código mostrará "¡Objeto OCULTO!" y dibujará el objeto con su altura visual reducida.
+*   **Resultado:** Como $60 \text{ km} > 55.55 \text{ km}$, la condición de visibilidad ($\le$) es falsa. El objeto está **OCULTO**. El código mostrará "¡Objeto OCULTO!" y dibujará el objeto con su altura visual reducida.
 
 **Ejemplo 2: Objeto Visible (Persona mirando un faro lejano)**
 
@@ -95,29 +97,27 @@ Vamos a usar ejemplos reales para ilustrar el cálculo.
     *   Altura Objeto (m): `30` (Altura del faro)
 
 *   **Cálculo:**
-    1.  Calcular distancia al horizonte del observador (`d_observador`):
-        `d_observador = 3.57 * sqrt(2)`
-        `d_observador ≈ 5.05 km`
+    1.  Calcular distancia al horizonte del observador ($d_{\text{observador}}$):
+        $$d_{\text{observador}} = 3.57 \cdot \sqrt{2}$$
+        $$d_{\text{observador}} \approx 5.05 \text{ km}$$
 
-    2.  Calcular distancia al horizonte del objeto (`d_objeto`):
-        `d_objeto = 3.57 * sqrt(30)`
-        `d_objeto ≈ 3.57 * 5.477`
-        `d_objeto ≈ 19.55 km`
+    2.  Calcular distancia al horizonte del objeto ($d_{\text{objeto}}$):
+        $$d_{\text{objeto}} = 3.57 \cdot \sqrt{30}$$
+        $$d_{\text{objeto}} \approx 3.57 \cdot 5.477$$
+        $$d_{\text{objeto}} \approx 19.55 \text{ km}$$
 
     3.  Calcular la suma de las distancias al horizonte:
-        `Suma_horizontes = d_observador + d_objeto`
-        `Suma_horizontes ≈ 5.05 km + 19.55 km`
-        `Suma_horizontes ≈ 24.6 km`
+        $$\text{Suma}_{\text{horizontes}} = d_{\text{observador}} + d_{\text{objeto}}$$
+        $$\text{Suma}_{\text{horizontes}} \approx 5.05 \text{ km} + 19.55 \text{ km}$$
+        $$\text{Suma}_{\text{horizontes}} \approx 24.6 \text{ km}$$
 
     4.  Comparar la distancia ingresada con la suma de los horizontes:
-        `distancia_ingresada (18 km) <= Suma_horizontes (24.6 km)`
+        $$18 \text{ km} \le 24.6 \text{ km}$$
 
-*   **Resultado:** Como `18 <= 24.6`, la condición de visibilidad (`<=`) es verdadera. El objeto es **VISIBLE**. El código mostrará "¡Objeto VISIBLE!" y dibujará el objeto con su altura visual completa.
+*   **Resultado:** Como $18 \text{ km} \le 24.6 \text{ km}$, la condición de visibilidad ($\le$) es verdadera. El objeto es **VISIBLE**. El código mostrará "¡Objeto VISIBLE!" y dibujará el objeto con su altura visual completa.
 
 ## Consideraciones
 
 *   La representación visual es simplificada y no escala linealmente la distancia de entrada. La distancia de entrada solo se utiliza para el *cálculo*.
 *   El cálculo utiliza una fórmula aproximada y un valor estándar para la refracción atmosférica. Las condiciones reales pueden variar.
 *   El código maneja entradas no numéricas o negativas mostrando un mensaje de error.
-
----
