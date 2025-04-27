@@ -121,7 +121,3 @@ Vamos a usar ejemplos reales para ilustrar el cálculo.
 *   El código maneja entradas no numéricas o negativas mostrando un mensaje de error.
 
 ---
-
-Este README explica qué hace tu aplicación, cómo funciona a alto nivel y detalla la lógica matemática detrás del cálculo de visibilidad, incluyendo ejemplos claros.
-Use code with caution.
-Markdown
