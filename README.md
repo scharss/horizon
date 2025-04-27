@@ -37,7 +37,7 @@ El cálculo se basa en el concepto de la "distancia al horizonte". La distancia 
 
 La fórmula aproximada utilizada en este código para la distancia al horizonte (`d`) en kilómetros, dada una altura (`h`) en metros, es:
 
-`d = 3.57 * sqrt(h)`
+`d = 3.57 * √h`
 
 Este factor `3.57` deriva de usar el radio de la Tierra (aproximadamente 6371 km) y a menudo incluye una corrección estándar para tener en cuenta la refracción atmosférica, que hace que los objetos parezcan ligeramente más altos o más lejanos de lo que estarían en el vacío.
 
@@ -45,15 +45,17 @@ Para que un objeto sea visible sobre la curvatura de la Tierra, la distancia tot
 
 **Condición de Visibilidad:**
 
-`distancia_ingresada <= d_observador + d_objeto`
+`distancia_ingresada ≤ d_observador + d_objeto`
 
 Donde:
 *   `distancia_ingresada` es el valor que el usuario pone en el campo "Distancia (km)".
-*   `d_observador = 3.57 * sqrt(altura_observador)` (con `altura_observador` en metros).
-*   `d_objeto = 3.57 * sqrt(altura_objeto)` (con `altura_objeto` en metros).
+*   `d_observador = 3.57 * √altura_observador` (con `altura_observador` en metros).
+*   `d_objeto = 3.57 * √altura_objeto` (con `altura_objeto` en metros).
 
 Si la `distancia_ingresada` es mayor que la suma `d_observador + d_objeto`, el objeto se considera **OCULTO**.
 Si la `distancia_ingresada` es menor o igual a la suma `d_observador + d_objeto`, el objeto se considera **VISIBLE**.
+
+*Nota: Las ecuaciones mostradas aquí usan caracteres estándar y Unicode básicos para mayor compatibilidad.*
 
 ### Paso a Paso con Ejemplos
 
@@ -68,24 +70,24 @@ Vamos a usar ejemplos reales para ilustrar el cálculo.
 
 *   **Cálculo:**
     1.  Calcular distancia al horizonte del observador (`d_observador`):
-        `d_observador = 3.57 * sqrt(2)`
-        `d_observador aprox. 3.57 * 1.414`
-        `d_observador aprox. 5.05 km`
+        `d_observador = 3.57 * √2`
+        `d_observador ≈ 3.57 * 1.414`
+        `d_observador ≈ 5.05 km`
 
     2.  Calcular distancia al horizonte del objeto (`d_objeto`):
-        `d_objeto = 3.57 * sqrt(200)`
-        `d_objeto aprox. 3.57 * 14.142`
-        `d_objeto aprox. 50.5 km`
+        `d_objeto = 3.57 * √200`
+        `d_objeto ≈ 3.57 * 14.142`
+        `d_objeto ≈ 50.5 km`
 
     3.  Calcular la suma de las distancias al horizonte:
         `Suma_horizontes = d_observador + d_objeto`
-        `Suma_horizontes aprox. 5.05 km + 50.5 km`
-        `Suma_horizontes aprox. 55.55 km`
+        `Suma_horizontes ≈ 5.05 km + 50.5 km`
+        `Suma_horizontes ≈ 55.55 km`
 
     4.  Comparar la distancia ingresada con la suma de los horizontes:
         `distancia_ingresada (60 km) > Suma_horizontes (55.55 km)`
 
-*   **Resultado:** Como `60 km > 55.55 km`, la condición de visibilidad (`<=`) es falsa. El objeto está **OCULTO**. El código mostrará "¡Objeto OCULTO!" y dibujará el objeto con su altura visual reducida.
+*   **Resultado:** Como `60 km > 55.55 km`, la condición de visibilidad (`≤`) es falsa. El objeto está **OCULTO**. El código mostrará "¡Objeto OCULTO!" y dibujará el objeto con su altura visual reducida.
 
 **Ejemplo 2: Objeto Visible (Persona mirando un faro lejano)**
 
@@ -96,23 +98,23 @@ Vamos a usar ejemplos reales para ilustrar el cálculo.
 
 *   **Cálculo:**
     1.  Calcular distancia al horizonte del observador (`d_observador`):
-        `d_observador = 3.57 * sqrt(2)`
-        `d_observador aprox. 5.05 km`
+        `d_observador = 3.57 * √2`
+        `d_observador ≈ 5.05 km`
 
     2.  Calcular distancia al horizonte del objeto (`d_objeto`):
-        `d_objeto = 3.57 * sqrt(30)`
-        `d_objeto aprox. 3.57 * 5.477`
-        `d_objeto aprox. 19.55 km`
+        `d_objeto = 3.57 * √30`
+        `d_objeto ≈ 3.57 * 5.477`
+        `d_objeto ≈ 19.55 km`
 
     3.  Calcular la suma de las distancias al horizonte:
         `Suma_horizontes = d_observador + d_objeto`
-        `Suma_horizontes aprox. 5.05 km + 19.55 km`
-        `Suma_horizontes aprox. 24.6 km`
+        `Suma_horizontes ≈ 5.05 km + 19.55 km`
+        `Suma_horizontes ≈ 24.6 km`
 
     4.  Comparar la distancia ingresada con la suma de los horizontes:
-        `distancia_ingresada (18 km) <= Suma_horizontes (24.6 km)`
+        `distancia_ingresada (18 km) ≤ Suma_horizontes (24.6 km)`
 
-*   **Resultado:** Como `18 km <= 24.6 km`, la condición de visibilidad (`<=`) es verdadera. El objeto es **VISIBLE**. El código mostrará "¡Objeto VISIBLE!" y dibujará el objeto con su altura visual completa.
+*   **Resultado:** Como `18 km ≤ 24.6 km`, la condición de visibilidad (`≤`) es verdadera. El objeto es **VISIBLE**. El código mostrará "¡Objeto VISIBLE!" y dibujará el objeto con su altura visual completa.
 
 ## Consideraciones
 
